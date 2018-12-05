@@ -151,7 +151,11 @@
                                         <br />
                                         {{-- <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('useDefaultPrinter=' + $('#useDefaultPrinter').attr('checked') + '&printerName=' + encodeURIComponent($('#installedPrinterName').val()) + '&filetype=' + $('#ddlFileType').val());">Print File...</a> --}}
                                         {{-- <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('useDefaultPrinter=' + $('#useDefaultPrinter').attr('checked') + '&printerName=' + encodeURIComponent($('#installedPrinterName').val()) + '&filetype=PNG');">Print File</a> --}}
-                                        <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('&printerName=' + encodeURIComponent('GP-80160(Cut) Series') + '&filetype=PNG');">Print File</a>
+                                        {{-- <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('&printerName=' + encodeURIComponent('HP Deskjet 1510 series') + '&filetype=PNG');">Print File</a> --}}
+                                        <a class="btn btn-success btn-lg" onclick="printall()">Print File</a>
+
+                                        {{-- <option>HP Deskjet 1510 series</option>
+                                        <option>GP-80160(Cut) Series </option> --}}
                                     </div>
                                 </div>
                             </div>
@@ -193,5 +197,14 @@ $wcpScript;
             if (s == 'JPG') $("#ifPreview").attr("src", "//webclientprintphp.azurewebsites.net/files/penguins300dpi.jpg");
             if (s == 'PNG') $("#ifPreview").attr("src", "//webclientprintphp.azurewebsites.net/files/SamplePngImage.png");
         }).change();
+
+        function printall()
+        {
+            var printers = {!! json_encode($printers) !!};
+            for (var item in printers) {
+                jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[item]) + '&filetype=PNG');
+                {{-- window.alert(printers[item]); --}}
+            }
+        }
 </script>
 @endsection
