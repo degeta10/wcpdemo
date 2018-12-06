@@ -34,11 +34,7 @@ class DemoPrintFileController extends Controller
     public function index(){
 
         $wcpScript = WebClientPrint::createScript(action('WebClientPrintController@processRequest'), action('DemoPrintFileController@printFile'), Session::getId());    
-        $printers = array("");
-        
-        // $printers = array("HP Deskjet 1510 series","GP-80160(Cut) Series");
-        // $printers = array("HP Deskjet 1510 series");
-        return view('DemoPrintFile.index', ['wcpScript' => $wcpScript,'printers'=>$printers]);
+        return view('DemoPrintFile.index', ['wcpScript' => $wcpScript]);
     }
 
     public function printFile(Request $request){

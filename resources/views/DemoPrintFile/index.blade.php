@@ -84,10 +84,12 @@
                                             <option>TIF</option>
                                         </select> --}}
                                         <br />
-                                        {{-- <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('useDefaultPrinter=' + $('#useDefaultPrinter').attr('checked') + '&printerName=' + encodeURIComponent($('#installedPrinterName').val()) + '&filetype=' + $('#ddlFileType').val());">Print File...</a> --}}
+                                        <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('useDefaultPrinter=' + $('#useDefaultPrinter').attr('checked') + '&printerName=' + encodeURIComponent($('#installedPrinterName').val()) + '&filetype=' + $('#ddlFileType').val());">Print File...</a>
                                         {{-- <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('useDefaultPrinter=' + $('#useDefaultPrinter').attr('checked') + '&printerName=' + encodeURIComponent($('#installedPrinterName').val()) + '&filetype=PNG');">Print File</a> --}}
                                         {{-- <a class="btn btn-success btn-lg" onclick="javascript:jsWebClientPrint.print('&printerName=' + encodeURIComponent('HP Deskjet 1510 series') + '&filetype=PNG');">Print File</a> --}}
-                                        <a id="print_button" class="btn btn-success btn-lg" onclick="printall()">Print File</a>
+                                        <a id="print_button" class="btn btn-success btn-lg" onclick="printall()">Print All</a>
+                                        <a id="print_button" class="btn btn-success btn-lg" onclick="printz()">Print Zero</a>
+                                        <a id="print_button" class="btn btn-success btn-lg" onclick="printfs()">Print First</a>
 
                                         {{-- <option>HP Deskjet 1510 series</option>
                                         <option>GP-80160(Cut) Series </option> --}}
@@ -122,20 +124,32 @@ $wcpScript;
 !!}
 
 <script type="text/javascript">
+        var printers=[];
+        
         function printall()
         {
-            var printers=[];
             $("#installedPrinterName option").each(function () {    
                 printers.push($(this).text());
-            }); 
+            });
+
             // for (var item in printers) {
             //     jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[item]) + '&filetype=TXT');
-            // }
-            //     jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[item]) + '&filetype=TXT');
-            // jsWebClientPrint.print('&printerName=' + printers[0] + '&filetype=TXT');
-            // jsWebClientPrint.print('&printerName=' + printers[1] + '&filetype=TXT');
-            jsWebClientPrint.print('&printerNames=' + encodeURIComponent(printers[0]) + '&filetype=TXT');
-            // jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[1]) + '&filetype=TXT');
+            //  }
+
+            //jsWebClientPrint.print('useDefaultPrinter=true' +'&printerName=' + encodeURIComponent(printers[0]) + '&filetype=TXT');
+            //alert('first');
+            //printz();
+                // printz();
+                // printz();
+            // printfs();
+            //setTimeout(function () {
+            //     //alert('pos');
+             //   printz();
+            //     printz();
+            //     printz();
+            //},1000);
+            jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[1]) + '&filetype=TXT');
+            jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[0]) + '&filetype=TXT');
             
             //console.log( printers.length);
             // setTimeout(function () {
@@ -156,6 +170,25 @@ $wcpScript;
         //          //},5000);
                
         //     };
+        }
+
+        function printz()
+        {
+            // var printers=[];
+            // $("#installedPrinterName option").each(function () {    
+            //     printers.push($(this).text());
+            // }); 
+            console.log(printers);
+            jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[0]) + '&filetype=TXT');
+        }
+
+        function printfs()
+        {
+            // var printers=[];
+            // $("#installedPrinterName option").each(function () {    
+            //     printers.push($(this).text());
+            // }); 
+            jsWebClientPrint.print('&printerName=' + encodeURIComponent(printers[1]) + '&filetype=TXT');
         }
 </script>
 @endsection
